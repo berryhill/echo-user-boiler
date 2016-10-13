@@ -65,14 +65,5 @@ func FindUser(username string) (User, error) {
 		return user, err
 	}
 
-	if user.Username == "" {
-		user.Username = username
-	}
-
-	//if user.Id == "" {
-	//	err := mgo.ErrNotFound
-	//	return &user, err
-	//}
-
 	return user, err
 }
