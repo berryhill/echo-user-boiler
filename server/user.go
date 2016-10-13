@@ -37,7 +37,7 @@ func Login(c echo.Context) error {
 		token := jwt.New(jwt.SigningMethodHS256)
 
 		claims := token.Claims.(jwt.MapClaims)
-		claims["name"] = "Jon Snow"
+		claims["name"] = user.Username
 		claims["admin"] = true
 		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
@@ -54,15 +54,14 @@ func Login(c echo.Context) error {
 }
 
 func GetUser(c echo.Context) error {
-	username := c.FormValue("username")
-	//password := c.FormValue("password")
+	username := c.Param("username")
 
 	user, err := models.FindUser(username)
 	if err != nil {
 		panic(err)
 	}
 
-	if user.Password != "" {
+	if user.Id != "" /*&& user.Username != "" */ {
 		return c.JSON(http.StatusOK, user)
 	} else {
 		return c.JSON(http.StatusNotFound, "not found")

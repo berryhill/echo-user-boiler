@@ -16,8 +16,9 @@ func Run() {
 	r.Use(middleware.JWT([]byte("secret")))
 
 	e.POST("/user", CreateUser)
-	e.GET("/user", GetUser)
 	e.POST("/login", Login)
+
+	e.GET("/user/:username", GetUser)
 	e.GET("/", accessible)
 	r.GET("", restricted)
 
