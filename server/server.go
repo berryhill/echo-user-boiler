@@ -10,11 +10,8 @@ import (
 
 func Run() {
 	e := echo.New()
-
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-
-	// Restricted group
 	r := e.Group("/restricted")
 	r.Use(middleware.JWT([]byte("secret")))
 
