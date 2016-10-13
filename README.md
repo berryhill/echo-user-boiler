@@ -1,2 +1,7 @@
 # echo-user-boiler
-API
+## API
+
+### POST/user
+### POST/login
+
+### GET/user/:username
