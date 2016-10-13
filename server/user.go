@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"fmt"
 
-	"github.com/midi-survey/models"
+	"github.com/user-boiler/models"
 
 	"github.com/labstack/echo"
 	"github.com/dgrijalva/jwt-go"

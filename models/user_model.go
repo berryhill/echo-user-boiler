@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"labix.org/v2/mgo/bson"
-	"github.com/midi-survey/store"
+	"github.com/user-boiler/store"
 )
 
 type User struct {

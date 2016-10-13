@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/midi-survey/server"
+	"github.com/user-boiler/server"
 )
 
 func main() {
