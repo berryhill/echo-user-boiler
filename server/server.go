@@ -18,9 +18,9 @@ func Run() {
 
 	//e.Use(middleware.Static("/static"))
 
-	e.Static("/", "static")
+	e.Static("/admin", "static")
 
-	//e.GET("/", accessible)
+	e.GET("/", accessible)
 	r.GET("", restricted)
 
 	e.GET("/user/:username", GetUser)
