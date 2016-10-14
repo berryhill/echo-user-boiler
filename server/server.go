@@ -6,6 +6,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/echo/engine/standard"
+	"github.com/user-boiler/models"
 )
 
 func Run() {
@@ -21,11 +22,14 @@ func Run() {
 
 	e.GET("/user/:username", GetUser)
 	e.GET("/question/:id", GetQuestion)
+	e.GET("/questions", GetAllQuestions)
 
 	e.POST("/user", CreateUser)
 	e.POST("/login", Login)
 	e.POST("/question", CreateQuestion)
 
+	survey := models.InitTestSurvey()
+	survey.Print()
 	fmt.Println("Server now running on port: 1323")
 	e.Run(standard.New(":1323"))
 }

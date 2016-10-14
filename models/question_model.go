@@ -1,14 +1,16 @@
 package models
 
 import (
+	"encoding/json"
+
 	"gopkg.in/mgo.v2/bson"
 	"github.com/user-boiler/store"
 )
 
 type Question struct {
-	Id		bson.ObjectId
-	Text 		string
-	//AnswerId	*bson.ObjectId
+	Id		bson.ObjectId 	`json:"id",bson:"_id,omitempty"`
+	Text 		string		`json:"text",bson:"text,omitempty"`
+	//AnswerId	*bson.ObjectId	`json:"id",bson:"_id,omitempty"`
 }
 
 func NewQuestion(text string) *Question {
@@ -19,16 +21,21 @@ func NewQuestion(text string) *Question {
 	return q
 }
 
+func (q *Question) MarshalJson() ([]byte, error) {
+	return json.Marshal(q)
+}
+
 func (q *Question) Save() error {
 	session, err := store.ConnectToDb()
 	defer session.Close()
 	if err != nil {
 		panic(err)
 	}
-	collection, err := store.ConnectToCollection(session, "checkbox_questions")
+	collection, err := store.ConnectToCollection(session, "questions")
 	if err != nil {
 		panic(err)
 	}
+
 	err = collection.Insert(&Question{
 		Id: q.Id,
 		Text: q.Text})
@@ -36,21 +43,8 @@ func (q *Question) Save() error {
 		panic(err)
 	}
 
-
 	return nil
 }
-
-func (q *Question) GetId() *bson.ObjectId {
-	return &q.Id
-}
-
-func (q *Question) GetText() string {
-	return q.Text
-}
-
-//func (cbq *CheckboxQuestion) GetAnswer() string {
-//	return "Implement"
-//}
 
 func FindQuestion(id string) (Question, error) {
 	session, err := store.ConnectToDb()
@@ -59,16 +53,37 @@ func FindQuestion(id string) (Question, error) {
 		panic(err)
 	}
 
-	collection, err := store.ConnectToCollection(session, "users")
+	collection, err := store.ConnectToCollection(session, "questions")
 	if err != nil {
 		panic(err)
 	}
 
 	question := Question{}
-	err = collection.Find(bson.M{"id": id}).One(&question)
+	err = collection.Find(bson.M{"_id": id}).One(&question)
 	if err != nil {
 		return question, err
 	}
 
 	return question, err
+}
+
+func Questions() ([]Question, error) {
+	session, err := store.ConnectToDb()
+	defer session.Close()
+	if err != nil {
+		panic(err)
+	}
+
+	collection, err := store.ConnectToCollection(session, "questions")
+	if err != nil {
+		panic(err)
+	}
+
+	questions := []Question{}
+	err = collection.Find(nil).All(&questions)
+	if err != nil {
+		return questions, err
+	}
+
+	return questions, err
 }
