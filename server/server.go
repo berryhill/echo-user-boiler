@@ -3,6 +3,8 @@ package server
 import (
 	"fmt"
 
+	"github.com/user-boiler/models"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/echo/engine/standard"
@@ -21,6 +23,10 @@ func Run() {
 
 	e.POST("/user", CreateUser)
 	e.POST("/login", Login)
+
+
+	survey := models.InitTestSurvey()
+	survey.Print()
 
 	fmt.Println("Server now running on port: 1323")
 	e.Run(standard.New(":1323"))
