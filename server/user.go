@@ -24,6 +24,21 @@ func CreateUser(c echo.Context) error {
 	return err
 }
 
+func GetUser(c echo.Context) error {
+	username := c.Param("username")
+
+	user, err := models.FindUser(username)
+	if err != nil {
+		panic(err)
+	}
+
+	if user.Id != "" /*&& user.Username != "" */ {
+		return c.JSON(http.StatusOK, user)
+	} else {
+		return c.JSON(http.StatusNotFound, "not found")
+	}
+}
+
 func Login(c echo.Context) error {
 	username := c.FormValue("username")
 	password := c.FormValue("password")
@@ -51,20 +66,5 @@ func Login(c echo.Context) error {
 	}
 
 	return echo.ErrUnauthorized
-}
-
-func GetUser(c echo.Context) error {
-	username := c.Param("username")
-
-	user, err := models.FindUser(username)
-	if err != nil {
-		panic(err)
-	}
-
-	if user.Id != "" /*&& user.Username != "" */ {
-		return c.JSON(http.StatusOK, user)
-	} else {
-		return c.JSON(http.StatusNotFound, "not found")
-	}
 }
 
