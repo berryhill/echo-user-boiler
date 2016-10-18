@@ -2,7 +2,6 @@ package store
 
 import (
 	"labix.org/v2/mgo"
-	//"labix.org/v2/mgo/bson"
 )
 
 func ConnectToDb() (*mgo.Session, error) {
