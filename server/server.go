@@ -19,11 +19,11 @@ func Run() {
 	r.GET("", restricted)
 
 	e.GET("/user/:id", GetUserById)
-	e.GET("/user/name/:username", GetUser)
+	e.GET("/user/name/:username", GetUserByUsername)
 	e.POST("/user", CreateUser)
 	e.PUT("/user/:id", UpdateUser)
-	e.POST("/login", Login)
 	e.GET("/users", GetAllUsers)
+	e.POST("/login", Login)
 	e.DELETE("/user/:id", DeleteUser)
 
 

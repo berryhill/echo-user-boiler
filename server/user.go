@@ -38,9 +38,8 @@ func CreateUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
-func GetUser(c echo.Context) error {
+func GetUserByUsername(c echo.Context) error {
 	username := c.Param("username")
-
 	user, err := models.FindUserByName(username)
 	if err != nil {
 		panic(err)
@@ -51,7 +50,6 @@ func GetUser(c echo.Context) error {
 
 func GetUserById(c echo.Context) error {
 	id := c.Param("id")
-
 	user, err := models.FindUserById(id)
 	if err != nil {
 		panic(err)
@@ -77,24 +75,6 @@ func UpdateUser(c echo.Context) error {
 	//TODO implement
 
 	return nil
-}
-
-func DeleteUser(c echo.Context) error {
-	id := c.Param("id")
-
-	user, err := models.FindUserById(id)
-	if err != nil {
-		panic(err)
-
-	}
-
-	err = user.Delete()
-	if err != nil {
-		panic(err)
-
-	}
-
-	return c.JSON(http.StatusOK, user)
 }
 
 func Login(c echo.Context) error {
@@ -132,5 +112,22 @@ func Login(c echo.Context) error {
 	}
 
 	return echo.ErrUnauthorized
+}
+
+func DeleteUser(c echo.Context) error {
+	id := c.Param("id")
+	user, err := models.FindUserById(id)
+	if err != nil {
+		panic(err)
+
+	}
+
+	err = user.Delete()
+	if err != nil {
+		panic(err)
+
+	}
+
+	return c.JSON(http.StatusOK, user)
 }
 
