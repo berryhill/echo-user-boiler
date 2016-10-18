@@ -5,12 +5,11 @@ import (
 
 	"labix.org/v2/mgo/bson"
 	"github.com/user-boiler/store"
-	//"gopkg.in/mgo.v2"
 )
 
 type User struct {
 	//BaseModel
-	Id 		bson.ObjectId 	`json:"id",bson:"_id,omitempty"`
+	Id 		bson.ObjectId 	`json:"_id",bson:"_id,omitempty"`
 	Timestamp 	time.Time	`json:"time",bson:"time,omitempty"`
 	Username	string		`json:"username",bson:"username,omitempty"`
 	Password	string		`json:"password",bson:"password,omitempty"`
@@ -19,6 +18,7 @@ type User struct {
 func NewUser(username string, password string) *User {
 	u := new(User)
 	u.Id = bson.NewObjectId()
+	u.Timestamp = time.Now()
 	u.Username = username
 	u.Password = password
 
@@ -82,7 +82,8 @@ func FindUserById(id string) (*User, error) {
 
 	collection, err := store.ConnectToCollection(session, "users")
 	if err != nil {
-		panic(err)
+		//panic(err)
+		return &User{}, err
 	}
 
 	user := User{}
