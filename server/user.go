@@ -3,20 +3,34 @@ package server
 import (
 	"time"
 	"net/http"
+	"encoding/json"
 	"fmt"
 
 	"github.com/user-boiler/models"
+	"io/ioutil"
 
 	"github.com/labstack/echo"
 	"github.com/dgrijalva/jwt-go"
+	"labix.org/v2/mgo/bson"
+	log "github.com/cihub/seelog"
 )
 
 func CreateUser(c echo.Context) error {
-	username := c.FormValue("username")
-	password := c.FormValue("password")
+	method := c.Request().Method()
+	uri := c.Request().URI()
+	log.Debugf("%s %s", method, uri)
 
-	user := models.NewUser(username, password)
-	err := user.Save()
+	json_body, err := ioutil.ReadAll(c.Request().Body())
+	user := models.User{}
+	err = json.Unmarshal(json_body, &user)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	user.Timestamp = time.Now()
+	user.Id = bson.NewObjectId()
+
+	err = user.Save()
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -76,15 +90,26 @@ func GetAllUsers(c echo.Context) error {
 }
 
 func Login(c echo.Context) error {
-	username := c.FormValue("username")
-	password := c.FormValue("password")
+	//username := c.FormValue("username")
+	//password := c.FormValue("password")
 
-	user, err := models.FindUserByName(username)
+	method := c.Request().Method()
+	uri := c.Request().URI()
+	log.Debugf("%s %s", method, uri)
+
+	json_body, err := ioutil.ReadAll(c.Request().Body())
+	u := models.User{}
+	err = json.Unmarshal(json_body, &u)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	user, err := models.FindUserByName(u.Username)
 	if err != nil {
 		panic(err)
 	}
 
-	if user.Password == password {
+	if u.Password == user.Password {
 		token := jwt.New(jwt.SigningMethodHS256)
 
 		claims := token.Claims.(jwt.MapClaims)
