@@ -10,12 +10,12 @@ Creates a User with a form
 Gets a User with the Restful Parameter
 + username {string}
 
-#### PUT/user/:id
-Updates a User with the Restful Parameter (not yet implemented)
-+ username {string}
-
 #### GET/user/name/:username
 Gets a User with the Restful Parameter
++ username {string}
+
+#### PUT/user/:id
+Updates a User with the Restful Parameter (not yet implemented)
 + username {string}
 
 #### GET/users
