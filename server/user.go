@@ -90,9 +90,6 @@ func GetAllUsers(c echo.Context) error {
 }
 
 func Login(c echo.Context) error {
-	//username := c.FormValue("username")
-	//password := c.FormValue("password")
-
 	method := c.Request().Method()
 	uri := c.Request().URI()
 	log.Debugf("%s %s", method, uri)
