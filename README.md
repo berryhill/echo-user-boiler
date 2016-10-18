@@ -15,6 +15,10 @@ Gets a User with the Restful Parameter
 Gets a User with the Restful Parameter
 + username {string}
 
+#### GET/me (not implemented yet)
+Gets current User
++ username {string}
+
 #### PUT/user/:id
 Updates a User with the Restful Parameter ':id' (not yet implemented)
 + username {string}
