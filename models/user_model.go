@@ -9,7 +9,7 @@ import (
 
 type User struct {
 	//BaseModel
-	Id 		bson.ObjectId    `json:"id",bson:"_id,omitempty"`
+	Id 		bson.ObjectId    `json:"_id",bson:"_id,omitempty"`
 	Timestamp 	time.Time	 `json:"time",bson:"time,omitempty"`
 	Username	string           `json:"username",bson:"username,omitempty"`
 	Password	string           `json:"password",bson:"password,omitempty"`
@@ -47,7 +47,7 @@ func (u *User) Save() error {
 	return nil
 }
 
-func FindUser(username string) (User, error) {
+func FindUserByName(username string) (User, error) {
 	session, err := store.ConnectToDb()
 	defer session.Close()
 	if err != nil {
@@ -66,4 +66,22 @@ func FindUser(username string) (User, error) {
 	}
 
 	return user, err
+}
+
+func GetAllUsers() ([]*User, error) {
+	session, err := store.ConnectToDb()
+	defer session.Close()
+	if err != nil {
+		panic(err)
+	}
+
+	collection, err := store.ConnectToCollection(session, "users")
+	if err != nil {
+		panic(err)
+	}
+
+	users := []*User{}
+	err = collection.Find(nil).All(&users)
+
+	return users, err
 }

@@ -28,7 +28,7 @@ func Login(c echo.Context) error {
 	username := c.FormValue("username")
 	password := c.FormValue("password")
 
-	user, err := models.FindUser(username)
+	user, err := models.FindUserByName(username)
 	if err != nil {
 		panic(err)
 	}
@@ -56,7 +56,7 @@ func Login(c echo.Context) error {
 func GetUser(c echo.Context) error {
 	username := c.Param("username")
 
-	user, err := models.FindUser(username)
+	user, err := models.FindUserByName(username)
 	if err != nil {
 		panic(err)
 	}
@@ -66,5 +66,14 @@ func GetUser(c echo.Context) error {
 	} else {
 		return c.JSON(http.StatusNotFound, "not found")
 	}
+}
+
+func GetAllUsers(c echo.Context) error {
+	users, err := models.GetAllUsers()
+	if err != nil {
+		panic(err)
+	}
+
+	return c.JSON(http.StatusOK, users)
 }
 
