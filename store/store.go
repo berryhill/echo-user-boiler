@@ -17,7 +17,7 @@ func ConnectToDb() (*mgo.Session, error) {
 }
 
 func ConnectToCollection(session *mgo.Session, collection_str string) (*mgo.Collection, error) {
-	collection := session.DB("test").C(collection_str)
+	collection := session.DB("tester").C(collection_str)
 	index := mgo.Index{
 		Key:        []string{"username"},
 		Unique:     true,
@@ -25,11 +25,10 @@ func ConnectToCollection(session *mgo.Session, collection_str string) (*mgo.Coll
 		Background: true,
 		Sparse:     true,
 	}
-
 	err := collection.EnsureIndex(index)
 	if err != nil {
 		panic(err)
 	}
 
-	return collection, err
+	return collection, nil
 }

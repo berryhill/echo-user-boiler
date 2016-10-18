@@ -68,6 +68,24 @@ func GetUser(c echo.Context) error {
 	}
 }
 
+func GetUserById(c echo.Context) error {
+	id := c.Param("id")
+
+	//id, _ := strconv.Atoi(c.Param("id"))
+
+	user, err := models.FindUserById(id)
+	if err != nil {
+		panic(err)
+
+	}
+
+	if user.Id != "" /*&& user.Username != "" */ {
+		return c.JSON(http.StatusOK, user)
+	} else {
+		return c.JSON(http.StatusNotFound, "not found")
+	}
+}
+
 func GetAllUsers(c echo.Context) error {
 	users, err := models.GetAllUsers()
 	if err != nil {

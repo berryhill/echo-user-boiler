@@ -15,7 +15,8 @@ func Run() {
 	r := e.Group("/restricted")
 	r.Use(middleware.JWT([]byte("secret")))
 
-	e.GET("/user/:username", GetUser)
+	e.GET("/user/name/:username", GetUser)
+	e.GET("/user/:id", GetUserById)
 	e.GET("/users", GetAllUsers)
 	e.GET("/", accessible)
 	r.GET("", restricted)
