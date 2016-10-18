@@ -35,7 +35,7 @@ func CreateUser(c echo.Context) error {
 		fmt.Println(err)
 	}
 
-	return err
+	return c.JSON(http.StatusOK, user)
 }
 
 func GetUser(c echo.Context) error {
@@ -46,26 +46,11 @@ func GetUser(c echo.Context) error {
 		panic(err)
 	}
 
-	if user.Id != "" /*&& user.Username != "" */ {
-		return c.JSON(http.StatusOK, user)
-	} else {
-		return c.JSON(http.StatusNotFound, "not found")
-	}
-}
-
-func UpdateUser(c echo.Context) error{
-	id := c.Param("id")
-	fmt.Println(id)
-
-	//TODO implement
-
-	return nil
+	return c.JSON(http.StatusOK, user)
 }
 
 func GetUserById(c echo.Context) error {
 	id := c.Param("id")
-
-	//id, _ := strconv.Atoi(c.Param("id"))
 
 	user, err := models.FindUserById(id)
 	if err != nil {
@@ -73,11 +58,7 @@ func GetUserById(c echo.Context) error {
 
 	}
 
-	if user.Id != "" /*&& user.Username != "" */ {
-		return c.JSON(http.StatusOK, user)
-	} else {
-		return c.JSON(http.StatusNotFound, "not found")
-	}
+	return c.JSON(http.StatusOK, user)
 }
 
 func GetAllUsers(c echo.Context) error {
@@ -87,6 +68,33 @@ func GetAllUsers(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, users)
+}
+
+func UpdateUser(c echo.Context) error {
+	id := c.Param("id")
+	fmt.Println(id)
+
+	//TODO implement
+
+	return nil
+}
+
+func DeleteUser(c echo.Context) error {
+	id := c.Param("id")
+
+	user, err := models.FindUserById(id)
+	if err != nil {
+		panic(err)
+
+	}
+
+	err = user.Delete()
+	if err != nil {
+		panic(err)
+
+	}
+
+	return c.JSON(http.StatusOK, user)
 }
 
 func Login(c echo.Context) error {

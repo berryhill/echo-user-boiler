@@ -96,6 +96,26 @@ func (u *User) Update() error {
 	return nil
 }
 
+func (u *User) Delete() error {
+	session, err := store.ConnectToDb()
+	defer session.Close()
+	if err != nil {
+		panic(err)
+	}
+
+	collection, err := store.ConnectToCollection(session, "users")
+	if err != nil {
+		panic(err)
+	}
+
+	err = collection.Remove(bson.M{"id": u.Id})
+	if err != nil {
+		panic(err)
+	}
+
+	return err
+}
+
 func FindUserByName(username string) (*User, error) {
 	session, err := store.ConnectToDb()
 	defer session.Close()

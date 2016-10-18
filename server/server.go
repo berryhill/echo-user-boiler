@@ -24,6 +24,7 @@ func Run() {
 	e.PUT("/user/:id", UpdateUser)
 	e.POST("/login", Login)
 	e.GET("/users", GetAllUsers)
+	e.DELETE("/user/:id", DeleteUser)
 
 
 	fmt.Println("Server now running on port: 1323")
