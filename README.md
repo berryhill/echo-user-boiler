@@ -19,10 +19,6 @@ Gets a User with the Restful Parameter
 Updates a User with the Restful Parameter ':id' (not yet implemented)
 + username {string}
 
-#### PUT/user/:id
-Deletes a User with the Restful Parameter ':id'
-+ id {string}
-
 #### GET/users
 Gets all Users
 
@@ -31,3 +27,7 @@ Logs a User in with a form
 JSON
 + username {string}
 + password {string}
+
+#### DELETE/user/:id
+Deletes a User with the Restful Parameter ':id'
++ id {string}
