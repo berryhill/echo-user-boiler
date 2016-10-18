@@ -9,7 +9,7 @@ import (
 
 type User struct {
 	//BaseModel
-	Id 		bson.ObjectId 	`json:"_id",bson:"_id,omitempty"`
+	Id 		bson.ObjectId 	`json:"id",bson:"_id,omitempty"`
 	Timestamp 	time.Time	`json:"time",bson:"time,omitempty"`
 	Username	string		`json:"username",bson:"username,omitempty"`
 	Password	string		`json:"password",bson:"password,omitempty"`
@@ -87,12 +87,10 @@ func FindUserById(id string) (*User, error) {
 	}
 
 	user := User{}
-	bid := bson.ObjectIdHex(id)
-	err = collection.FindId(bid).One(&user)
-	//err = collection.Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&user)
+	err = collection.Find(bson.M{"id": bson.ObjectIdHex(id)}).One(&user)
 	if err != nil {
-		panic(err)
-		//return &user, err
+		//panic(err)
+		return &user, err
 	}
 
 	return &user, err

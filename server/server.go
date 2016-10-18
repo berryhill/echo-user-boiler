@@ -15,14 +15,15 @@ func Run() {
 	r := e.Group("/restricted")
 	r.Use(middleware.JWT([]byte("secret")))
 
-	e.GET("/user/name/:username", GetUser)
-	e.GET("/user/:id", GetUserById)
-	e.GET("/users", GetAllUsers)
 	e.GET("/", accessible)
 	r.GET("", restricted)
 
+	e.GET("/user/:id", GetUserById)
+	e.GET("/user/name/:username", GetUser)
 	e.POST("/user", CreateUser)
+	e.PUT("/user/:id", UpdateUser)
 	e.POST("/login", Login)
+	e.GET("/users", GetAllUsers)
 
 
 	fmt.Println("Server now running on port: 1323")

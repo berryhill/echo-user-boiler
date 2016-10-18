@@ -24,35 +24,6 @@ func CreateUser(c echo.Context) error {
 	return err
 }
 
-func Login(c echo.Context) error {
-	username := c.FormValue("username")
-	password := c.FormValue("password")
-
-	user, err := models.FindUserByName(username)
-	if err != nil {
-		panic(err)
-	}
-
-	if user.Password == password {
-		token := jwt.New(jwt.SigningMethodHS256)
-
-		claims := token.Claims.(jwt.MapClaims)
-		claims["name"] = user.Username
-		claims["admin"] = true
-		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
-
-		t, err := token.SignedString([]byte("secret"))
-		if err != nil {
-			return err
-		}
-		return c.JSON(http.StatusOK, map[string]string{
-			"token": t,
-		})
-	}
-
-	return echo.ErrUnauthorized
-}
-
 func GetUser(c echo.Context) error {
 	username := c.Param("username")
 
@@ -66,6 +37,15 @@ func GetUser(c echo.Context) error {
 	} else {
 		return c.JSON(http.StatusNotFound, "not found")
 	}
+}
+
+func UpdateUser(c echo.Context) error{
+	id := c.Param("id")
+	fmt.Println(id)
+
+	//TODO implement
+
+	return nil
 }
 
 func GetUserById(c echo.Context) error {
@@ -93,5 +73,34 @@ func GetAllUsers(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, users)
+}
+
+func Login(c echo.Context) error {
+	username := c.FormValue("username")
+	password := c.FormValue("password")
+
+	user, err := models.FindUserByName(username)
+	if err != nil {
+		panic(err)
+	}
+
+	if user.Password == password {
+		token := jwt.New(jwt.SigningMethodHS256)
+
+		claims := token.Claims.(jwt.MapClaims)
+		claims["name"] = user.Username
+		claims["admin"] = true
+		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+
+		t, err := token.SignedString([]byte("secret"))
+		if err != nil {
+			return err
+		}
+		return c.JSON(http.StatusOK, map[string]string{
+			"token": t,
+		})
+	}
+
+	return echo.ErrUnauthorized
 }
 
