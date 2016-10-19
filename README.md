@@ -2,8 +2,7 @@
 ## API
 
 #### POST/user
-Creates a User with a form
-JSON
+Creates a User with JSON
 ```
 {
   "username": {string},
@@ -31,13 +30,19 @@ Updates a User with the Restful Parameter ':id'
 Gets all Users
 
 #### POST/login
-Logs a User in with a form
-JSON
+User Login Portal with JSON
 ```
 {
   "username": {string},
   "password": {string}
 }
+```
+Returns a TokenedUser JSON
+```
+{
+  "username": {string},
+  "id": {string},
+  "token": {string}
 ```
 
 #### DELETE/user/:id
