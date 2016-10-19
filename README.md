@@ -23,8 +23,8 @@ Gets a User with the Restful Parameter
 Gets current User
 + username {string}
 
-#### PUT/user/:id
-Updates a User with the Restful Parameter ':id' (not yet implemented)
+#### PUT/user/:id (not yet implemented)
+Updates a User with the Restful Parameter ':id'
 + username {string}
 
 #### GET/users
