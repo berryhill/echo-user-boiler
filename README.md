@@ -33,10 +33,12 @@ Gets all Users
 #### POST/login
 Logs a User in with a form
 JSON
+```
 {
   "username": {string},
   "password": {string}
 }
+```
 
 #### DELETE/user/:id
 Deletes a User with the Restful Parameter ':id'
