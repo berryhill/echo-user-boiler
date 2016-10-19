@@ -4,10 +4,12 @@
 #### POST/user
 Creates a User with a form
 JSON
-`{
+```
+{
   "username": {string},
   "password": {string}
-}`
+}
+```
 
 #### GET/user/:id
 Gets a User with the Restful Parameter
