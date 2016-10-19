@@ -43,6 +43,7 @@ Returns a TokenedUser JSON
   "username": {string},
   "id": {string},
   "token": {string}
+}
 ```
 
 #### DELETE/user/:id
