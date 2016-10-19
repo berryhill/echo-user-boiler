@@ -16,6 +16,12 @@ type User struct {
 	Password	string		`json:"password",bson:"password,omitempty"`
 }
 
+type TokenedUser struct {
+	Id 		bson.ObjectId 	`json:"id"`
+	Username	string		`json:"username"`
+	Token		string		`json:"token"`
+}
+
 func NewUser(username string, password string) *User {
 	u := new(User)
 	u.Id = bson.NewObjectId()

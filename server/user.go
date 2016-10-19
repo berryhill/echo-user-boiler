@@ -59,6 +59,13 @@ func GetUserById(c echo.Context) error {
 	return c.JSON(http.StatusOK, user)
 }
 
+func GetCurrentUser(c echo.Context) error {
+
+	//TODO implement
+
+	return c.JSON(http.StatusMethodNotAllowed, "Route is NOT implemented")
+}
+
 func GetAllUsers(c echo.Context) error {
 	users, err := models.GetAllUsers()
 	if err != nil {
@@ -74,7 +81,7 @@ func UpdateUser(c echo.Context) error {
 
 	//TODO implement
 
-	return nil
+	return c.JSON(http.StatusMethodNotAllowed, "Route is NOT implmented")
 }
 
 func Login(c echo.Context) error {
@@ -106,9 +113,14 @@ func Login(c echo.Context) error {
 		if err != nil {
 			return err
 		}
-		return c.JSON(http.StatusOK, map[string]string{
-			"token": t,
-		})
+
+		tokened_user := models.TokenedUser{
+			Id:		user.Id,
+			Username:	user.Username,
+			Token:		t,
+		}
+
+		return c.JSON(http.StatusOK, tokened_user)
 	}
 
 	return echo.ErrUnauthorized

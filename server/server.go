@@ -20,6 +20,7 @@ func Run() {
 
 	e.GET("/user/:id", GetUserById)
 	e.GET("/user/name/:username", GetUserByUsername)
+	r.GET("/me", GetCurrentUser)
 	e.POST("/user", CreateUser)
 	e.PUT("/user/:id", UpdateUser)
 	e.GET("/users", GetAllUsers)
