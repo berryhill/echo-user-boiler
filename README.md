@@ -4,8 +4,12 @@
 #### POST/user
 Creates a User with a form
 JSON
-+ username {string}
-+ password {string}
+```
+{
+  "username": {string},
+  "password": {string}
+}
+```
 
 #### GET/user/:id
 Gets a User with the Restful Parameter
@@ -15,8 +19,12 @@ Gets a User with the Restful Parameter
 Gets a User with the Restful Parameter
 + username {string}
 
-#### PUT/user/:id
-Updates a User with the Restful Parameter ':id' (not yet implemented)
+#### GET/me (not implemented yet)
+Gets current User
++ username {string}
+
+#### PUT/user/:id (not yet implemented)
+Updates a User with the Restful Parameter ':id'
 + username {string}
 
 #### GET/users
@@ -25,8 +33,12 @@ Gets all Users
 #### POST/login
 Logs a User in with a form
 JSON
-+ username {string}
-+ password {string}
+```
+{
+  "username": {string},
+  "password": {string}
+}
+```
 
 #### DELETE/user/:id
 Deletes a User with the Restful Parameter ':id'
