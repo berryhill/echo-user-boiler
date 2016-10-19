@@ -23,7 +23,7 @@ Gets current User
 + username {string}
 
 #### PUT/user/:id (not yet implemented)
-Updates a User with the Restful Parameter ':id'
+Updates a User with the Restful Parameter
 + username {string}
 
 #### GET/users
@@ -47,5 +47,5 @@ Returns a TokenedUser JSON
 ```
 
 #### DELETE/user/:id
-Deletes a User with the Restful Parameter ':id'
+Deletes a User with the Restful Parameter
 + id {string}
