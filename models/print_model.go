@@ -105,7 +105,7 @@ func GetAllPrints() ([]*Print, error) {
 	return prints, err
 }
 
-func (p *Print)checkResolution(resolution int) error {
+func (p *Print) checkResolution(resolution int) error {
 	if resolution < 100 || resolution > 400 {
 		return errors.New("Unsupported Resolution")
 	} else {
@@ -115,4 +115,10 @@ func (p *Print)checkResolution(resolution int) error {
 			return nil
 		}
 	}
+}
+
+func (p *Print) calculateVolume() (float32, error) {
+	//TODO implement
+
+	return nil
 }
