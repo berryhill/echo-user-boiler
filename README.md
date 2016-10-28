@@ -2,9 +2,13 @@
 ## API
 
 #### POST/user
+<<<<<<< HEAD
 Creates a User with a form
 <<<<<<< HEAD
 JSON
+=======
+Creates a User with JSON
+>>>>>>> 96fd4a69b5294fddd309bc5532551539fc358336
 ```
 {
   "username": {string},
@@ -35,24 +39,31 @@ Gets current User
 + username {string}
 
 #### PUT/user/:id (not yet implemented)
-Updates a User with the Restful Parameter ':id'
+Updates a User with the Restful Parameter
 + username {string}
 
 #### GET/users
 Gets all Users
 
 #### POST/login
-Logs a User in with a form
-JSON
+User Login Portal with JSON
 ```
 {
   "username": {string},
   "password": {string}
 }
 ```
+Returns a TokenedUser JSON
+```
+{
+  "username": {string},
+  "id": {string},
+  "token": {string}
+}
+```
 
 #### DELETE/user/:id
-Deletes a User with the Restful Parameter ':id'
+Deletes a User with the Restful Parameter
 + id {string}
 =======
 
