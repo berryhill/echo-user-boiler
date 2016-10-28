@@ -12,6 +12,7 @@ func Run() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+
 	r := e.Group("/restricted")
 	r.Use(middleware.JWT([]byte("secret")))
 
@@ -26,7 +27,6 @@ func Run() {
 	e.GET("/users", GetAllUsers)
 	e.POST("/login", Login)
 	e.DELETE("/user/:id", DeleteUser)
-
 
 	fmt.Println("Server now running on port: 1323")
 	e.Run(standard.New(":1323"))

@@ -11,7 +11,6 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/dgrijalva/jwt-go"
-	//"labix.org/v2/mgo/bson"
 	log "github.com/cihub/seelog"
 )
 
@@ -57,7 +56,6 @@ func GetUserById(c echo.Context) error {
 }
 
 func GetCurrentUser(c echo.Context) error {
-
 	//TODO implement
 
 	return c.JSON(http.StatusMethodNotAllowed, "Route is NOT implemented")
@@ -75,7 +73,6 @@ func GetAllUsers(c echo.Context) error {
 func UpdateUser(c echo.Context) error {
 	id := c.Param("id")
 	fmt.Println(id)
-
 	//TODO implement
 
 	return c.JSON(http.StatusMethodNotAllowed, "Route is NOT implmented")

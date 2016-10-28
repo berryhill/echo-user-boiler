@@ -10,6 +10,13 @@ import (
 	"encoding/binary"
 )
 
+//TODO implement; would like to use an enum for the Status instead of a string
+//type Enum string
+//const (
+//	NotCompleted Enum = ""
+//	Completed
+//)
+
 type Print struct {
 	Id 		bson.ObjectId 		`json:"id",bson:"_id,omitempty"`
 	Timestamp 	time.Time		`json:"time",bson:"time,omitempty"`
@@ -39,7 +46,7 @@ func (p *Print) Save() error {
 		panic(err)
 	}
 
-	collection, err := store.ConnectToCollection(session, "users")
+	collection, err := store.ConnectToCollection(session, "prints")
 	if err != nil {
 		panic(err)
 	}
@@ -48,7 +55,6 @@ func (p *Print) Save() error {
 		Id:		p.Id,
 		Timestamp:	p.Timestamp,
 	}
-
 	err = collection.Insert(print)
 	if err != nil {
 		return err
@@ -120,5 +126,11 @@ func (p *Print) checkResolution(resolution int) error {
 func (p *Print) calculateVolume() (float32, error) {
 	//TODO implement
 
-	return nil
+	return 4.20, nil
+}
+
+func (p *Print) calculatePrice() (float32, error) {
+	//TODO implement
+
+	return 10.00, nil
 }
