@@ -3,7 +3,6 @@ package models
 import (
 	"time"
 
-	//"labix.org/v2/mgo"
 	"labix.org/v2/mgo/bson"
 	"github.com/user-boiler/store"
 )

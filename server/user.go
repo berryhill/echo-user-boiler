@@ -53,7 +53,6 @@ func GetUserById(c echo.Context) error {
 	user, err := models.FindUserById(id)
 	if err != nil {
 		panic(err)
-
 	}
 
 	return c.JSON(http.StatusOK, user)
