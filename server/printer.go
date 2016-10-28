@@ -32,7 +32,7 @@ func CreatePrinter(c echo.Context) error {
 		fmt.Println(err)
 	}
 
-	return c.JSON(http.StatusOK, print)
+	return c.JSON(http.StatusOK, printer)
 }
 
 //func GetPrintertById(c echo.Context) error {
