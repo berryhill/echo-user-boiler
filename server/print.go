@@ -25,7 +25,6 @@ func CreatePrint(c echo.Context) error {
 	}
 
 	print := models.NewPrint()
-
 	//TODO implement; will need to combine parsed json with NewPrint
 
 	err = print.Save()

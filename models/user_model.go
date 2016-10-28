@@ -77,6 +77,7 @@ func (u *User) Update() error {
 		Password: 	u.Password,
 	}
 
+	//TODO implement; need to figure out how to update the User
 	//change := mgo.Change{
 	//	Update:    bson.M{"$inc": bson.M{"n": 1}, "$set": bson.M{"username": myStruct.Name}},
 	//	Upsert:    false,

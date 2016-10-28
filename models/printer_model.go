@@ -9,14 +9,16 @@ import (
 )
 
 type Printer struct {
-	Id 		bson.ObjectId 		`json:"id",bson:"_id,omitempty"`
-	Timestamp 	time.Time		`json:"time",bson:"time,omitempty"`
-	Technology 	string			`json:"technology",bson:"technology,omitempty"`
-	MaxX		float32			`json:"max_x",bson:"max_x,omitempty"`
-	MaxY		float32			`json:"max_y",bson:"max_y,omitempty"`
-	MaxZ		float32			`json:"max_z",bson:"max_z,omitempty"`
-	Colors 		[]string		`json:"colors",bson:"colors,omitempty"`
-	Resolutions	[]int			`json:"resolutions",bson:"resolutions,omitempty"`
+	Id 			bson.ObjectId 		`json:"id",bson:"_id,omitempty"`
+	Timestamp 		time.Time		`json:"time",bson:"time,omitempty"`
+	Technology 		string			`json:"technology",bson:"technology,omitempty"`
+	MaxX			float32			`json:"max_x",bson:"max_x,omitempty"`
+	MaxY			float32			`json:"max_y",bson:"max_y,omitempty"`
+	MaxZ			float32			`json:"max_z",bson:"max_z,omitempty"`
+	Colors 			[]string		`json:"colors",bson:"colors,omitempty"`
+	Resolutions		[]int			`json:"resolutions",bson:"resolutions,omitempty"`
+	Infills			float32			`json:"infills",bson:"infills,omitempty"`
+	SupportMaterial		bool			`json:"support_material",bson:"support_material,omitempty"`
 }
 
 func NewPrinter() *Printer {
@@ -27,7 +29,7 @@ func NewPrinter() *Printer {
 	return po
 }
 
-func (po *Printer) Save() error {
+func (p *Printer) Save() error {
 	session, err := store.ConnectToDb()
 	defer session.Close()
 	if err != nil {
@@ -39,7 +41,7 @@ func (po *Printer) Save() error {
 		panic(err)
 	}
 
-	err = collection.Insert(po)
+	err = collection.Insert(p)
 	if err != nil {
 		return err
 	}
