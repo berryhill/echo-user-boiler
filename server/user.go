@@ -11,7 +11,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/dgrijalva/jwt-go"
-	"labix.org/v2/mgo/bson"
+	//"labix.org/v2/mgo/bson"
 	log "github.com/cihub/seelog"
 )
 
@@ -21,15 +21,13 @@ func CreateUser(c echo.Context) error {
 	log.Debugf("%s %s", method, uri)
 
 	json_body, err := ioutil.ReadAll(c.Request().Body())
-	user := models.User{}
-	err = json.Unmarshal(json_body, &user)
+	u := models.User{}
+	err = json.Unmarshal(json_body, &u)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	user.Timestamp = time.Now()
-	user.Id = bson.NewObjectId()
-
+	user := models.NewUser(u.Username, u.Password)
 	err = user.Save()
 	if err != nil {
 		fmt.Println(err)
